@@ -16,7 +16,7 @@ func DownloadProvider(c *gin.Context) {
 	version := c.Param("version")
 	osParam := c.Param("os")
 	arch := c.Param("arch")
-	filePath := filepath.Join("data/providers", namespace, name+".json")
+	filePath := filepath.Join(model.DataPath, namespace, name+".json")
 
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "File not found"})

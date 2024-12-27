@@ -13,6 +13,7 @@ func RegisterRoutes(router *gin.Engine) {
 	{
 		provider.GET("/:namespace/:name/:version/download/:os/:arch", controller.DownloadProvider)
 		provider.GET("/:namespace/:name/versions", controller.GetVersion)
+		provider.POST("/:namespace/:name/upload", controller.UploadProvider)
 	}
 
 	router.GET("/.well-known/terraform.json", func(c *gin.Context) {

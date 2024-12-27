@@ -1,5 +1,7 @@
 package model
 
+const DataPath = "data/providers"
+
 type GPGPublicKey struct {
 	KeyID          string `json:"key_id"`
 	AsciiArmor     string `json:"ascii_armor"`
