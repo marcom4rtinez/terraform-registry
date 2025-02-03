@@ -49,13 +49,17 @@ func UploadProvider(c *gin.Context) {
 		return
 	}
 
-	for _, elem := range data.Versions {
-		if elem.Version == newVersion.Version {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Duplicate release"})
-			return
+	if data.Versions[0].Version != "" {
+		for _, elem := range data.Versions {
+			if elem.Version == newVersion.Version {
+				c.JSON(http.StatusBadRequest, gin.H{"error": "Duplicate release"})
+				return
+			}
 		}
+		data.Versions = append(data.Versions, newVersion)
+	} else {
+		data.Versions[0] = newVersion
 	}
-	data.Versions = append(data.Versions, newVersion)
 
 	updatedData, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
